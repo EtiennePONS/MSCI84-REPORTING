@@ -2,21 +2,21 @@
   "name": "M.S.C.I 84 — Rapports d'intervention",
   "short_name": "M.S.C.I 84",
   "description": "Application de gestion des rapports d'intervention",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
   "theme_color": "#132140",
   "background_color": "#eef0f3",
   "icons": [
     {
-      "src": "/public/icons/icon-192.png",
+      "src": "./public/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/public/icons/icon-512.png",
+      "src": "./public/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
@@ -25,7 +25,7 @@
   "categories": ["productivity"],
   "screenshots": [
     {
-      "src": "/public/icons/icon-512.png",
+      "src": "./public/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
