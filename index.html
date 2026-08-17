@@ -307,7 +307,7 @@ async function loadClients(){
   
   // Charger depuis le fichier JSON
   try{
-    const response = await fetch('/data/clients.json');
+    const response = await fetch('./data/clients.json');
     if(response.ok) {
       fileData = await response.json();
       // Marquer comme provenant du fichier
@@ -353,7 +353,7 @@ async function loadTechniciens(){
   
   // Charger depuis le fichier JSON
   try{
-    const response = await fetch('/data/techniciens.json');
+    const response = await fetch('./data/techniciens.json');
     if(response.ok) {
       fileData = await response.json();
       // Marquer comme provenant du fichier
