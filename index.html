@@ -302,15 +302,92 @@ async function persistReports(){
   if(!ok) showToast("Stockage indisponible sur cet appareil — la sauvegarde n'a pas pu être enregistrée.", true);
 }
 async function loadClients(){
-  try{ const v = storageGet(SK.clients); return v ? JSON.parse(v) : []; }catch(e){ return []; }
+  let fileData = [];
+  let storageData = [];
+  
+  // Charger depuis le fichier JSON
+  try{
+    const response = await fetch('/data/clients.json');
+    if(response.ok) {
+      fileData = await response.json();
+      // Marquer comme provenant du fichier
+      fileData = fileData.map(item => ({ ...item, fromFile: true }));
+    }
+  }catch(e){
+    // Fichier non trouvé ou erreur réseau — pas grave
+  }
+  
+  // Charger depuis le localStorage
+  try{
+    const v = storageGet(SK.clients);
+    storageData = v ? JSON.parse(v) : [];
+  }catch(e){}
+  
+  // Fusionner: fichier d'abord, puis storage (pour les ajouts manuels)
+  const allIds = new Set();
+  const merged = [];
+  
+  fileData.forEach(item => {
+    allIds.add(item.id);
+    merged.push(item);
+  });
+  
+  storageData.forEach(item => {
+    if(!allIds.has(item.id)){
+      allIds.add(item.id);
+      merged.push(item);
+    }
+  });
+  
+  return merged;
 }
+
 async function persistClients(){
   const ok = storageSet(SK.clients, JSON.stringify(state.clients));
   if(!ok) showToast("Stockage indisponible sur cet appareil — la sauvegarde n'a pas pu être enregistrée.", true);
 }
+
 async function loadTechniciens(){
-  try{ const v = storageGet(SK.techniciens); return v ? JSON.parse(v) : []; }catch(e){ return []; }
+  let fileData = [];
+  let storageData = [];
+  
+  // Charger depuis le fichier JSON
+  try{
+    const response = await fetch('/data/techniciens.json');
+    if(response.ok) {
+      fileData = await response.json();
+      // Marquer comme provenant du fichier
+      fileData = fileData.map(item => ({ ...item, fromFile: true }));
+    }
+  }catch(e){
+    // Fichier non trouvé ou erreur réseau — pas grave
+  }
+  
+  // Charger depuis le localStorage
+  try{
+    const v = storageGet(SK.techniciens);
+    storageData = v ? JSON.parse(v) : [];
+  }catch(e){}
+  
+  // Fusionner: fichier d'abord, puis storage (pour les ajouts manuels)
+  const allIds = new Set();
+  const merged = [];
+  
+  fileData.forEach(item => {
+    allIds.add(item.id);
+    merged.push(item);
+  });
+  
+  storageData.forEach(item => {
+    if(!allIds.has(item.id)){
+      allIds.add(item.id);
+      merged.push(item);
+    }
+  });
+  
+  return merged;
 }
+
 async function persistTechniciens(){
   const ok = storageSet(SK.techniciens, JSON.stringify(state.techniciens));
   if(!ok) showToast("Stockage indisponible sur cet appareil — la sauvegarde n'a pas pu être enregistrée.", true);
@@ -941,8 +1018,8 @@ function renderSettings(){
       <p class="section-hint">Liste des intervenants proposés dans le formulaire.</p>
       ${state.techniciens.length ? state.techniciens.map(t=>`
         <div class="settings-row">
-          <span>${esc(t.nom)}</span>
-          <button class="btn btn-danger" onclick="deleteTechnicien('${t.id}')">${ICONS.trash}</button>
+          <span>${esc(t.nom)}${t.fromFile ? ' <span style="font-size:10px;color:var(--muted);">— App</span>' : ''}</span>
+          ${!t.fromFile ? `<button class="btn btn-danger" onclick="deleteTechnicien('${t.id}')">${ICONS.trash}</button>` : '<span style="width:40px;"></span>'}
         </div>`).join('') : '<p class="section-hint">Aucun technicien enregistré.</p>'}
       <div class="perf"></div>
       <div class="field"><label>Nom du technicien</label><input type="text" id="newTechNom" placeholder="Ex : Adam Dryepondt"></div>
@@ -956,10 +1033,10 @@ function renderSettings(){
       ${state.clients.length ? state.clients.map(c=>`
         <div class="settings-row settings-row-client">
           <div>
-            <div class="scn">${esc(c.nom)}</div>
+            <div class="scn">${esc(c.nom)}${c.fromFile ? ' <span style="font-size:10px;color:var(--muted);">— App</span>' : ''}</div>
             <div class="scs">${c.siren?('SIREN '+esc(c.siren)):''} ${c.contact?(' · '+esc(c.contact)):''} ${c.tel?(' · '+esc(c.tel)):''}</div>
           </div>
-          <button class="btn btn-danger" onclick="deleteClient('${c.id}')">${ICONS.trash}</button>
+          ${!c.fromFile ? `<button class="btn btn-danger" onclick="deleteClient('${c.id}')">${ICONS.trash}</button>` : '<span style="width:40px;"></span>'}
         </div>`).join('') : '<p class="section-hint">Aucun client enregistré.</p>'}
       <div class="perf"></div>
       <div class="field"><label>Nom du client / société</label><input type="text" id="newClientNom" placeholder="Raison sociale"></div>
@@ -982,6 +1059,11 @@ async function addTechnicien(){
   showToast('Technicien ajouté.');
 }
 async function deleteTechnicien(id){
+  const technicien = state.techniciens.find(t=>t.id===id);
+  if(technicien && technicien.fromFile) {
+    showToast('Les techniciens du fichier de données ne peuvent pas être supprimés.', true);
+    return;
+  }
   state.techniciens = state.techniciens.filter(t=>t.id!==id);
   await persistTechniciens();
   render();
@@ -1002,6 +1084,11 @@ async function addClient(){
   showToast('Client ajouté.');
 }
 async function deleteClient(id){
+  const client = state.clients.find(c=>c.id===id);
+  if(client && client.fromFile) {
+    showToast('Les clients du fichier de données ne peuvent pas être supprimés.', true);
+    return;
+  }
   state.clients = state.clients.filter(c=>c.id!==id);
   await persistClients();
   render();

@@ -1,0 +1,29 @@
+[
+  {
+    "id": "c_001",
+    "nom": "Entreprise ABC",
+    "site": "Site principal",
+    "adresse": "123 rue de la Paix, 84000 Avignon",
+    "contact": "Jean Dupont",
+    "tel": "04 90 XX XX XX",
+    "siren": "123456789"
+  },
+  {
+    "id": "c_002",
+    "nom": "Construction XYZ",
+    "site": "Chantier Carpentras",
+    "adresse": "45 avenue de Lyon, 84200 Carpentras",
+    "contact": "Marie Martin",
+    "tel": "04 90 YY YY YY",
+    "siren": "987654321"
+  },
+  {
+    "id": "c_003",
+    "nom": "Bâtiments Provence",
+    "site": "Atelier technique",
+    "adresse": "12 zone industrielle, 84100 Orange",
+    "contact": "Pierre Bernard",
+    "tel": "04 90 ZZ ZZ ZZ",
+    "siren": "456789123"
+  }
+]
