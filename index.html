@@ -701,7 +701,7 @@ function renderWizard(){
 }
 
 function stepGeneral(c){
-  const clientOptions = state.clients.map(cl=>`<option value="${cl.id}" ${c.clientId===cl.id?'selected':''}>${esc(cl.nom)}${cl.siren?(' — SIREN '+esc(cl.siren)):''}</option>`).join('');
+  const clientOptions = state.clients.map(cl=>`<option value="${cl.id}" ${c.clientId===cl.id?'selected':''}>${esc(cl.nom)}${cl.site?(' — '+esc(cl.site)):''}</option>`).join('');
   const techOptions = state.techniciens.map(t=>`<option value="${esc(t.nom)}" ${c.technicien===t.nom?'selected':''}>${esc(t.nom)}</option>`).join('');
   return `
     <h2 class="section-title">${ICONS.client} Informations générales</h2>
