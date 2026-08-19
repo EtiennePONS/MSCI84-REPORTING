@@ -1024,7 +1024,7 @@ function renderSettings(){
         </div>`).join('') : '<p class="section-hint">Aucun technicien enregistré.</p>'}
       <div class="perf"></div>
       <div class="field"><label>Nom du technicien</label><input type="text" id="newTechNom" placeholder="Ex : Adam Dryepondt"></div>
-      <button class="btn btn-primary btn-block" onclick="addTechnicien()">${ICONS.check} Ajouter le technicien</button>
+      <button class="btn btn-primary btn-block" onclick="addTechnicien()">${ICONS.check} Ajouter le technicien (local)</button>
     </div>
 
     <div class="panel card">
@@ -1047,7 +1047,7 @@ function renderSettings(){
       </div>
       <div class="field"><label>Nom du contact</label><input type="text" id="newClientContact" placeholder="Interlocuteur habituel"></div>
       <div class="field"><label>Adresse</label><input type="text" id="newClientAdresse"></div>
-      <button class="btn btn-primary btn-block" onclick="addClient()">${ICONS.check} Ajouter le client</button>
+      <button class="btn btn-primary btn-block" onclick="addClient()">${ICONS.check} Ajouter le client (local)</button>
     </div>
   `;
 }
