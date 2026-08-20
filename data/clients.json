@@ -26,13 +26,67 @@
     "tel": "06.12.60.41.75",
     "siren": ""
   },
-    {
+  {
     "id": "c_004",
     "nom": "CEMEX BETONS SUD EST",
     "site": "Route de Saint-Paul-Trois Châteaux, 84840 LA PALUD",
     "adresse": "",
     "contact": "Thierry CIACCI",
     "tel": "06.12.60.41.75",
+    "siren": ""
+  },
+  {
+    "id": "c_005",
+    "nom": "COPAT",
+    "site": "Lieu Dit LES RAMIERES, 84110 SABLET",
+    "adresse": "",
+    "contact": "Mikaël BAYLAC",
+    "tel": "07.87.95.37.63",
+    "siren": ""
+  },
+  {
+    "id": "c_006",
+    "nom": "HALADJIAN Solution",
+    "site": "1951 Route d'Orange, 84700 SORGUES",
+    "adresse": "",
+    "contact": "Jonathan GOMEZ",
+    "tel": "07.85.94.06.26",
+    "siren": ""
+  },
+  {
+    "id": "c_007",
+    "nom": "HALADJIAN Equipement",
+    "site": "1951 Route d'Orange, 84700 SORGUES",
+    "adresse": "",
+    "contact": "Léna MARTINEZ",
+    "tel": "04.90.39.39.62",
+    "siren": ""
+  },
+  {
+    "id": "c_008",
+    "nom": "HEIDELBERG MATERIALS CIMENTS",
+    "site": "CD 986 , 30840 MEYNES",
+    "adresse": "",
+    "contact": "Francis PAUPRAT",
+    "tel": "06.82.82.97.10",
+    "siren": ""
+  },
+  {
+    "id": "c_009",
+    "nom": "LAFARGE GRANULATS",
+    "site": "Lieu Dit Lacau-RD6082-Sud village, 30210 VALLIGUIERES",
+    "adresse": "",
+    "contact": "Cyril VERGIER ",
+    "tel": "06.08.35.73.74",
+    "siren": ""
+  },
+  {
+    "id": "c_010",
+    "nom": "LES CHAUX DE LA TOUR",
+    "site": "Route D'APT, 84440 ROBION ",
+    "adresse": "",
+    "contact": "Vincent JAUBERT",
+    "tel": "06.07.25.57.98",
     "siren": ""
   }
 ]
